@@ -147,7 +147,7 @@ class Layers extends Object {
 		var higherlayer, lowerlayer; 
 		if( layer1 > layer2){ higherlayer = layer1; lowerlayer = layer2;}
 		else{ higherlayer = layer2; lowerlayer = layer1;}
-
+		
 		var higherStart = layersIndexes[higherlayer - 1];
 		var higherLen = layersIndexes[higherlayer] - higherStart;
 		var a = children.splice(higherStart, higherLen);
@@ -173,5 +173,4 @@ class Layers extends Object {
 		    layersIndexes[i] += diffLen;
 		}
 	}
-
 }
