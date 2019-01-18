@@ -156,7 +156,7 @@ class Layers extends Object {
 		    	var Start = layer == 0 ? 0 : layersIndexes[layer - 1];
 			var Len = layersIndexes[layer] - Start;
 			var a = children.splice(Start, Len);			
-			diffLen += (Len * hxd.Math.pow(-1, i));
+			diffLen += (Len * Std.int(hxd.Math.pow(-1, i)));
 			var k = Len;
 			while(k > 0){
 				if(i == 0 && lowerlayer - 1 < 0) children.insert(0, a[k-1]);
