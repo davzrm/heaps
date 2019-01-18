@@ -139,5 +139,39 @@ class Layers extends Object {
 		}
 	}
 
+	//swap out objects of one layer with another layer, useful when wanting to draw objects of lower layer above the current higher layer. 
+	public function swap( layer1 : Int, layer2 : Int ) {
+		if( layer1 >= layerCount || layer2 >= layerCount ) return;
+		if( layer1 == layer2 ) return; 	
+		
+		var higherlayer, lowerlayer; 
+		if( layer1 > layer2){ higherlayer = layer1; lowerlayer = layer2;}
+		else{ higherlayer = layer2; lowerlayer = layer1;}
+
+		var higherStart = layersIndexes[higherlayer - 1];
+		var higherLen = layersIndexes[higherlayer] - higherStart;
+		var a = children.splice(higherStart, higherLen);
+
+		var lowerStart = lowerlayer == 0 ? 0:layersIndexes[lowerlayer - 1];
+		var lowerLen = layersIndexes[lowerlayer] - lowerStart;
+		var b = children.splice(lowerStart, lowerLen);
+
+		var diffLen = higherLen - lowerLen;
+		var k = higherLen;
+		while(k > 0){
+		    children.insert(lowerStart, a[k-1]);
+		    k--;
+		}
+		higherStart += diffLen;
+		k = lowerLen;		
+		while(k > 0){
+		    children.insert(higherStart, b[k-1]);
+		    k--;
+		}
+		
+		for(i in lowerlayer...higherlayer)){
+		    layersIndexes[i] += diffLen;
+		}
+	}
 
 }
